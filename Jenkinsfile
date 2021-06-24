@@ -16,7 +16,9 @@ pipeline {
         }
         stage('Test') {
             steps {
+                withEnv(['PATH+EXTRA=/Users/chandan.soni01/Desktop/Software/apache-maven-3.3.9/bin']) {
                 sh 'mvn test'
+                }
             }
             post {
                 always {
