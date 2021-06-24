@@ -26,6 +26,17 @@ pipeline {
                 }
             }
         }
-
+		stage('Publish') {
+			steps {
+			    withEnv(['PATH+EXTRA=/Users/chandan.soni01/Desktop/Software/apache-maven-3.3.9/bin']) {
+                sh 'mvn package'
+                }
+			}
+		   	post {
+	   		    success {
+    		   	    archiveArtifacts 'target/*.jar'
+    		   	}
+	   		}
+		}
     }
 }
