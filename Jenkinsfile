@@ -10,10 +10,20 @@ pipeline {
         stage('Build') {
             steps {
                withEnv(['PATH+EXTRA=/Users/chandan.soni01/Desktop/Software/apache-maven-3.3.9/bin']) {
-                sh 'mvn clean install'
+                sh 'mvn clean compile'
                 }
-                
             }
         }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+            post {
+                always {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                }
+            }
+        }
+
     }
 }
